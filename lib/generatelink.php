@@ -18,6 +18,11 @@ class GenerateLink
         return ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
     }
 
+    protected static function redirPageLink()
+    {
+        return ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/jsp_auth/redir.php';
+    }
+
     public function checkAccess($tgID)
     {
         $arUser = UserTable::getList([
@@ -33,10 +38,10 @@ class GenerateLink
 
     public function generateLink()
     {
-        $redirectLink = self::homePageLink();
+        $redirectLink = self::redirPageLink();
         if($this->tgID && $this->userID) {
             $mToken = \Bitrix\Main\Config\Option::get('jsp.tgauth', 'JSP_AUTHORIZE_TOKEN');
-            $redirectLink .= "/?" . http_build_query(['token' => $mToken, 'tgID' => $this->tgID]);
+            $redirectLink .= "?" . http_build_query(['token' => $mToken, 'tgID' => $this->tgID]);
         }
         $shortUri = \CBXShortUri::GenerateShortUri();
         $rs = \CBXShortUri::Add([
