@@ -32,7 +32,7 @@ class GenerateLink
             "select" => ["ID"]
         ])->fetch();
         $this->userID = $arUser ? $arUser["ID"] : false;
-        $this->tgID = $arUser ? $arUser["ID"] : false;
+        $this->tgID = $tgID;
         return $this->userID;
     }
 
