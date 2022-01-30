@@ -16,6 +16,8 @@ if($token && $tgID) {
         if($uID) {
             $USER->Authorize($uID);
             LocalRedirect($mRedirectUrl);
+        } else {
+            LocalRedirect($redirectUrl);
         }
     }
 } else {
