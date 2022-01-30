@@ -9,6 +9,7 @@ use Bitrix\Main\UserTable;
 class GenerateLink
 {
     protected $userID;
+    protected $tgID;
 
     const USER_FIELD_TG_ID = "UF_TG_ID";
 
@@ -26,12 +27,25 @@ class GenerateLink
             "select" => ["ID"]
         ])->fetch();
         $this->userID = $arUser ? $arUser["ID"] : false;
+        $this->tgID = $arUser ? $arUser["ID"] : false;
         return $this->userID;
     }
 
     public function generateLink()
     {
-        return '/';
+        $redirectLink = self::homePageLink();
+        if($this->tgID && $this->userID) {
+            $mToken = \Bitrix\Main\Config\Option::get('jsp.tgauth', 'JSP_AUTHORIZE_TOKEN');
+            $redirectLink .= "/?" . http_build_query(['token' => $mToken, 'tgID' => $this->tgID]);
+        }
+        $shortUri = \CBXShortUri::GenerateShortUri();
+        $rs = \CBXShortUri::Add([
+            "URI" => $redirectLink,
+            "SHORT_URI" => $shortUri,
+            "STATUS" => "301",
+        ]);
+
+        return $rs ? self::homePageLink() . '/' . $shortUri : self::homePageLink();
     }
 
 }

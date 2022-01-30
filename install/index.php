@@ -90,8 +90,8 @@ Class jsp_tgauth extends CModule
     function InstallFiles()
     {
         CopyDirFiles(
-            __DIR__ . '/files/jsp_auth',
-            $_SERVER["DOCUMENT_ROOT"] . '/jsp_auth',
+            __DIR__ . '/files/jsp_auth/',
+            $_SERVER["DOCUMENT_ROOT"] . '/jsp_auth/',
             true,
             true
         );
@@ -99,7 +99,7 @@ Class jsp_tgauth extends CModule
 
     function UnInstallFiles()
     {
-        DeleteDirFilesEx('/jsp_auth');
+        DeleteDirFilesEx($_SERVER["DOCUMENT_ROOT"] . '/jsp_auth/');
     }
 }
 ?>
