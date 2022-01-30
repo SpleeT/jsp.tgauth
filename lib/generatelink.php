@@ -12,6 +12,11 @@ class GenerateLink
 
     const USER_FIELD_TG_ID = "UF_TG_ID";
 
+    public static function homePageLink()
+    {
+        return ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
+    }
+
     public function checkAccess($tgID)
     {
         $arUser = UserTable::getList([

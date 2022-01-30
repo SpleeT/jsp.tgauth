@@ -31,7 +31,7 @@ class GetLink
 
     function __construct(array $query)
     {
-        if($query['tg_id']) {
+        if(isset($query['tg_id'])) {
             $this->tg_id = $query['tg_id'];
         } else {
             $this->message = 'parameter tg_id is empty';
@@ -40,11 +40,12 @@ class GetLink
 
     public function generateLink()
     {
-        if($this->tg_id) return false;
+        if(!$this->tg_id) return false;
         $obLink = new GenerateLink();
         $access = $obLink->checkAccess($this->tg_id);
         if($access) {
             $this->link = $obLink->generateLink();
+            $this->success = true;
         } else {
             $this->message = 'access denied';
         }
