@@ -1,5 +1,5 @@
 <?php
-$MESS['JSP_TGAUTH.MODULE_NAME'] = 'Авторизация ';
+$MESS['JSP_TGAUTH.MODULE_NAME'] = 'Авторизация TG';
 $MESS['JSP_TGAUTH.MODULE_DESC'] = 'Обработка и хранение данных для работы сценариев';
 $MESS['JSP_TGAUTH.PARTNER_NAME'] = 'newlevelbusiness.ru';
 $MESS['JSP_TGAUTH.PARTNER_URI'] = 'https://newlevelbusiness.ru/';
